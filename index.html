@@ -20,9 +20,26 @@
     <h1 class="display-3">Task Board</h1>
     <p class="lead">A simple Kanban board for task management</p>
   </header>
+
   <div class="container">
     <div class="text-center mb-5">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModal">Add Task</button>
+    </div>
+
+    <!--modal with form-->
+    <div class="modal" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
+      <div class="mod-dialog">
+        <div class="mod-content">
+
+<!-- header-->
+          <div class="mod-header">
+            <h5 class="mod-title">Add Task</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+<!--body-->
+          
+        </div>
+      </div>
     </div>
     <!-- Todo: Create a modal with a form to add tasks -->
     <div class="row swim-lanes text-center justify-content-between">
@@ -70,4 +87,4 @@
   <script src="./assets/js/script.js"></script>
 </body>
 
-</html>
+</html> 
