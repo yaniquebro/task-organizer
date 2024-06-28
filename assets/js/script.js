@@ -2,6 +2,12 @@
 let taskList = JSON.parse(localStorage.getItem("tasks"));
 let nextId = JSON.parse(localStorage.getItem("nextId"));
 
+// variables for iD
+const taskForm = $("#taskForm");
+const formTitle = $("formTitle");
+const formDate = $("formDate");
+const formDescription = $("formDescription");
+
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
 
