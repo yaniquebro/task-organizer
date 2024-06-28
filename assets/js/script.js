@@ -10,12 +10,13 @@ const formDescription = $("formDescription");
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
-
+    const id = newId++;
+    localStorage.setItem("newId", JSON.stringify(newId));
 }
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-
+const = 
 }
 
 // Todo: create a function to render the task list and make cards draggable
