@@ -12,18 +12,41 @@ const formDescription = $("#formDescription");
 function generateTaskId() {
     const id = newId++;
     localStorage.setItem("newId", JSON.stringify(newId));
+    return id;
 }
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-const card = $("<div>").addClass("card draggable").attr("id", task.id);
-const cardBody = $("<div>").addClass("card-body");
-const cardTitle = $("<h5>").addClass("card-title").text(task.title);
-const cardText = $("<p>").addClass("card-text").text(task.description);
-const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
-const deleteBtn = $("<button>").addClass("btn btn-danger").text("Delete");
-deleteBtn.click(handleDeleteTask);
+    const card = $("<div>").addClass("card draggable").attr("id", task.id);
+    const cardBody = $("<div>").addClass("card-body");
+    const cardTitle = $("<h5>").addClass("card-title").text(task.title);
+    const cardText = $("<p>").addClass("card-text").text(task.description);
+    const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
+    const deleteBtn = $("<button>").addClass("btn btn-danger").text("Delete");
+    deleteBtn.click(handleDeleteTask);
+
+//check if task has a due date
+    if (task.dueDate && task.status !== "done") {
+        let taskDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
+        let currentDate = dayjs();
+    }
+
+// change color based on when due
+        if (taskDueDate.isBefore(currentDate, "day")) {
+            card.addClass("bg-danger text-white");
+        } else if (taskDueDate.isSame(currentDate, "day")) {
+            card.addClass("bg-warning text-white");
+        } else if (taskDueDate.isAfter(currentDate, "day")) {
+            card.addClass("bg-light text-dark");
+        }
+
 }
+
+cardBody.append(cardTitle, cardText, cardDueDate, deleteBtn);
+card.append(cardBody);
+
+return card;
+
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
