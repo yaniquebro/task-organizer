@@ -42,7 +42,7 @@ function createTaskCard(task) {
     }
 
 //apppend elements to card
-    cardBody.append(cardTitle, cardText, cardDueDate, deleteBtn);
+    cardBody.append(cardTitle, cardText, cardDueDate, deleteButton);
     card.append(cardBody);
 
     return card;
@@ -66,16 +66,34 @@ function renderTaskList() {
         } 
     }
 
+// draggable cards
     $(".draggable").draggable({
         opacity: 0.7,
         zindex: 100,
     });
-    
+
 }
 
 // Todo: create a function to handle adding a new task
 function handleAddTask(event){
+    event.preventDefault();
 
+    const title = inputTitle.val().trim();
+    const dueDate = inputDueDate.val().trim();
+    const description = inputDescription.val().trim();
+
+    if (!title || !dueDate || !description) {
+        alert("Please fill out the task.");
+        return;
+    }
+
+    const newTask = {
+        id: generateTaskId(),
+        title: title,
+        dueDate: dueDate,
+        description: description,
+        status: "to-do"
+    };
 }
 
 // Todo: create a function to handle deleting a task
