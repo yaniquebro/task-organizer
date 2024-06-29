@@ -4,34 +4,34 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // variables for iD
 const taskForm = $("#taskForm");
-const formTitle = $("#formTitle");
-const formDate = $("#formDate");
-const formDescription = $("#formDescription");
+const inputTitle = $("#formTitle");
+const inputDueDate = $("#formDate");
+const inputDescription = $("#formDescription");
 
-// Todo: create a function to generate a unique task id
+// Function to generate a unique task id
 function generateTaskId() {
-    const id = newId++;
-    localStorage.setItem("newId", JSON.stringify(newId));
+    const id = nextId++;
+    localStorage.setItem("nextId", JSON.stringify(nextId));
     return id;
 }
 
-// Todo: create a function to create a task card
+// Function to create a task card
 function createTaskCard(task) {
     const card = $("<div>").addClass("card draggable").attr("id", task.id);
     const cardBody = $("<div>").addClass("card-body");
     const cardTitle = $("<h5>").addClass("card-title").text(task.title);
     const cardText = $("<p>").addClass("card-text").text(task.description);
     const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
-    const deleteBtn = $("<button>").addClass("btn btn-danger").text("Delete");
-    deleteBtn.click(handleDeleteTask);
+    const deleteButton = $("<button>").addClass("btn btn-danger").text("Delete");
+    deleteButton.click(handleDeleteTask);
 
-//check if task has a due date
+
+//check if task has due date 
     if (task.dueDate && task.status !== "done") {
         let taskDueDate = dayjs(task.dueDate, "YYYY-MM-DD");
         let currentDate = dayjs();
-    }
 
-// change color based on when due
+//change color depending on the day and when it's due
         if (taskDueDate.isBefore(currentDate, "day")) {
             card.addClass("bg-danger text-white");
         } else if (taskDueDate.isSame(currentDate, "day")) {
@@ -40,13 +40,13 @@ function createTaskCard(task) {
             card.addClass("bg-light text-dark");
         }
     }
-
-//apppend elements to card
+// Append elements to card
     cardBody.append(cardTitle, cardText, cardDueDate, deleteButton);
     card.append(cardBody);
 
     return card;
 
+}
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
@@ -94,6 +94,19 @@ function handleAddTask(event){
         description: description,
         status: "to-do"
     };
+
+    taskList.push(newTask);
+    localStorage.setItem("tasks", JSON.stringify(taskList)); 
+
+    renderTaskList();
+
+// clear input
+    inputTitle.val("");
+    inputDueDate.val("");
+    inputDescription.val("");
+
+// close form
+    $("#formModal").modal("hide");
 }
 
 // Todo: create a function to handle deleting a task
