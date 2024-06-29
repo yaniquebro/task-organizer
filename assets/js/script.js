@@ -39,18 +39,38 @@ function createTaskCard(task) {
         } else if (taskDueDate.isAfter(currentDate, "day")) {
             card.addClass("bg-light text-dark");
         }
+    }
 
-}
+//apppend elements to card
+    cardBody.append(cardTitle, cardText, cardDueDate, deleteBtn);
+    card.append(cardBody);
 
-cardBody.append(cardTitle, cardText, cardDueDate, deleteBtn);
-card.append(cardBody);
-
-return card;
+    return card;
 
 
 // Todo: create a function to render the task list and make cards draggable
 function renderTaskList() {
+    
+    $(".lane .card").remove();
 
+
+    for(const task of taskList) {
+        const taskCard = createTaskCard(task);
+
+        if (task.status === "to-do") {
+            $("#todo-cards").append(taskCard);
+        } else if (task.status === "in-progress") {
+            $("#in-progress-cards").append(taskCard); 
+        } else if (task.status === "done") {
+            $("#done-cards").append(taskCard)
+        } 
+    }
+
+    $(".draggable").draggable({
+        opacity: 0.7,
+        zindex: 100,
+    });
+    
 }
 
 // Todo: create a function to handle adding a new task
