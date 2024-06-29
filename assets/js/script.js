@@ -118,6 +118,8 @@ function handleDeleteTask(event){
     renderTaskList();
 }
 
+$("#addTaskBtn").click(handleAddTask);
+
 // Todo: create a function to handle dropping a task into a new status lane
 function handleDrop(event, ui) {
 
