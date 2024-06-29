@@ -4,9 +4,9 @@ let nextId = JSON.parse(localStorage.getItem("nextId"));
 
 // variables for iD
 const taskForm = $("#taskForm");
-const formTitle = $("formTitle");
-const formDate = $("formDate");
-const formDescription = $("formDescription");
+const formTitle = $("#formTitle");
+const formDate = $("#formDate");
+const formDescription = $("#formDescription");
 
 // Todo: create a function to generate a unique task id
 function generateTaskId() {
@@ -16,7 +16,13 @@ function generateTaskId() {
 
 // Todo: create a function to create a task card
 function createTaskCard(task) {
-const = 
+const card = $("<div>").addClass("card draggable").attr("id", task.id);
+const cardBody = $("<div>").addClass("card-body");
+const cardTitle = $("<h5>").addClass("card-title").text(task.title);
+const cardText = $("<p>").addClass("card-text").text(task.description);
+const cardDueDate = $("<p>").addClass("card-text").text('Due Date: ' + task.dueDate);
+const deleteBtn = $("<button>").addClass("btn btn-danger").text("Delete");
+deleteBtn.click(handleDeleteTask);
 }
 
 // Todo: create a function to render the task list and make cards draggable
